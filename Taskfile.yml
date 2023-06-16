@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: '3'
+
+env:
+  NEO4J_HOME: neo4j-community-5.9.0
+
+tasks:
+  install-elm:
+    desc: Install spaCy English language model (medium)
+    cmds:
+      - python -m spacy download en_core_web_md
+
+  neo4j-console:
+    desc: Run Neo4j as a console application
+    cmds:
+      - $NEO4J_HOME/bin/neo4j console
+
+  neo4j-start:
+    desc: Run Neo4j as a background process
+    cmds:
+      - $NEO4J_HOME/bin/neo4j start
