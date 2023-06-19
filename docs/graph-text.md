@@ -27,5 +27,35 @@ The approach outlined above allows us to leverage document embeddings as feature
 
 # Build and Explore a Graph
 
+Workflow
+
+1. **Install Neo4j Server**. Download the latest Neo4j Server from the [Neo4j Download Center](https://neo4j.com/download-center/). 
+   - Install Neo4j Server on your disk using [instructions for your specific operating system](https://neo4j.com/docs/operations-manual/current/installation/).
+   - Recent versions need the Java Development Kit (JDK) 11.x or newer installed as a prerequisite. Follow the [instructions appropriate to your operating system](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) to install the JDK.
+   - Start the Neo4j server. The directory under which you installed Neo4j will contain a folder with a name starting with `neo4j-community-`. This is your NEO4J_HOME. To start the Neo4j server at your console, run `$NEO4J_HOME/bin/neo4j console` at the command line. You should see the server start up and eventually say that its remote interface is listening on port 7474.
+   - Navigate to the Neo4j web interface on your browser—navigate to http://localhost:7474. You will be prompted for the Neo4j user and system password (they are `neo4j` and `neo4j`, respectively). Once you enter them, you will be prompted to change your password. Choose a new password for user neo4j.
+   - You should now be able to enter commands to interact with Neo4j. As a test, enter `SHOW DATABASES`; in the browser prompt and hit Control-Enter (or Command-Enter for Mac OS users). You should see the databases neo4j and system.
+
+2. **Configure the Neo4j server**. At this point, our Neo4j server can serve results from user-supplied [Cypher queries](https://neo4j.com/developer/cypher/), but we also want to install the [Graph Data Science (GDS)](https://neo4j.com/docs/graph-data-science/current/) and [Awesome Procedures on Cypher (APOC)](https://neo4j.com/labs/apoc/) plugins.
+   - To install the GDS plugin, first stop the Neo4j server (Control-C if you used neo4j console to start or `$NEO4J_HOME/bin/neo4j stop` if you used neo4j start to start the server. 
+   - Download the [plugin from the Neo4j Download Center](https://neo4j.com/docs/graph-data-science/current/installation/neo4j-server/) and copy the JAR file to $NEO4J_PLUGINS/plugins/. 
+   - To install the [APOC plugin](https://neo4j.com/docs/apoc/current/installation/#apoc), copy the APOC JAR file from $NEO4J_HOME/labs to $NEO4J_HOME/plugins. 
+   - Update the Neo4j configuration file at $NEO4J_HOME/conf/neo4j.conf and set the following properties:
+     - `apoc.export.file.enabled` to true 
+     - `apoc.import.file.enabled` to true
+     - `apoc.import.file.use_neo4j_config` to false
+     - `dbms.security.procedures.unrestricted` to apoc.*,gds.*
+     - `dbms.memory.heap.initial_size` to 8G if you can afford it; otherwise set it to around 50–75% of your available RAM
+     - `dbms.memory.heap.max_size` to 8G if you can afford it; otherwise set it to around 50–75% of your available RAM
+
+3. **Create a new database**. This step is not strictly necessary, but in general it is safer to isolate application data from system data, so we will create a separate database to store our graph. That way, if there are issues with the data, we can safely issue a DROP DATABASE command on our database. Unfortunately, Neo4j Community Server doesn’t provide a way to create one from the web browser, but there is a simple hack to do this. In `$NEO4J_HOME/conf/neo4j.conf`, uncomment the property `dbms.default_database` and set it to `av-graph` (that’s the name we give our database).'
+   - Restart the Neo4j server. You should see av-graph as a selection option on the left-hand navigation panel of the Neo4j web interface.
+4. **Create node.csv and edge.csv files**. We will convert the adjacency matrix we created in the previous milestone into a pair of CSV files nodes.csv and edges.csv. The nodes.csv file contains information about documents—the ID along with metadata such as title and category. The edges.csv file contains information about the links between similar documents in the graph. The header of either file contains important metadata that communicates the graph structure to Neo4j.
+5. Create the graph. To create the graph, convert the adjacency matrix we created in the previous milestone into a node list and an edge list. Refer to the instructions under the section Create Input files for neo4j-admin on how to do this. The output of this step should be a pair of files nodes.csv and edges.tsv.
+   - Stop the Neo4j server by using the command $NEO4J_HOME/bin/neo4j stop.
+   - Run the neo4j-admin command to load the files into Neo4j: $NEO4J_HOME/bin/neo4j-admin import --database=av-graph --nodes=nodes.csv --relationships=edges.csv.
+   - Restart Neo4j server using $NEO4J_HOME/bin/neo4j start or $NEO4J_HOME/bin/neo4j console.
+6. **Run exploratory commands**. Install the py2neo library using pip install py2neo. We will use this library to connect to Neo4j and issue Cypher queries. Go back to the web interface and examine the graph using some Cypher queries to count the number of nodes and edges in the graph. You can do this either from the Neo4j web interface at http://localhost:7474/ using pure Cypher, or connect to the server from your Jupyter notebook using py2neo.
+
 # Explore a Graph Using Neo4j
 

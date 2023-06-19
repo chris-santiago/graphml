@@ -20,3 +20,8 @@ tasks:
     desc: Run Neo4j as a background process
     cmds:
       - $NEO4J_HOME/bin/neo4j start
+
+  neo4j-stop:
+    desc: Stop Neo4j as a background process
+    cmds:
+      - $NEO4J_HOME/bin/neo4j stop
