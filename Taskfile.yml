@@ -25,3 +25,8 @@ tasks:
     desc: Stop Neo4j as a background process
     cmds:
       - $NEO4J_HOME/bin/neo4j stop
+
+  load-graph:
+    desc: Bulk load nodes and edges
+    cmds:
+      - $NEO4J_HOME/bin/neo4j-admin database import full graphml --nodes="data/nodes_header.csv,data/nodes.csv" --relationships="data/edges_header.csv,data/edges.csv" --overwrite-destination

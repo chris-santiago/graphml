@@ -57,5 +57,10 @@ Workflow
    - Restart Neo4j server using $NEO4J_HOME/bin/neo4j start or $NEO4J_HOME/bin/neo4j console.
 6. **Run exploratory commands**. Install the py2neo library using pip install py2neo. We will use this library to connect to Neo4j and issue Cypher queries. Go back to the web interface and examine the graph using some Cypher queries to count the number of nodes and edges in the graph. You can do this either from the Neo4j web interface at http://localhost:7474/ using pure Cypher, or connect to the server from your Jupyter notebook using py2neo.
 
+!!! caution
+
+    Step (2) is outdated. APOC config should be in its own `$NEO4J_HOME/conf/apoc.conf` file.
+    Step (5) is outdated. See [import docs](https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/)
+
 # Explore a Graph Using Neo4j
 
