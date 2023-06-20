@@ -15,7 +15,11 @@ def make_nodes() -> pl.DataFrame:
         separator="\t",
         infer_schema_length=0,
     )
-    return abstracts.select(pl.col("column_1").alias("ID"), pl.col("column_2").alias("TITLE"))
+    return abstracts.select(
+        pl.col("column_1").alias("ID"),
+        pl.col("column_2").alias("TITLE"),
+        pl.col("column_3").str.extract(r"(\w+)", 1).alias("CATEGORY"),
+    )
 
 
 def make_edges() -> pl.DataFrame:
