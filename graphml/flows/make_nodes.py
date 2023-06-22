@@ -25,7 +25,7 @@ def make_nodes(data: pl.DataFrame) -> pl.DataFrame:
     return data.select(
         pl.col("docId"),
         pl.col("title"),
-        pl.col("category").str.extract(r"(\w+)", 1),
+        pl.col("category").str.split(";").list.first(),  # Grab first category
         pl.lit("Paper").alias("label"),
     )
 

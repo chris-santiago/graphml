@@ -6,7 +6,7 @@ import scipy.sparse as sparse
 import graphml
 
 constants = graphml.Constants()
-SIMILARITY_THRESHOLD = 0.975
+SIMILARITY_THRESHOLD = 0.985
 
 
 @prefect.task()
