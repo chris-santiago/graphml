@@ -146,3 +146,4 @@ cython_debug/
 # User
 neo4j-community-5.9.0/
 notebooks/sols/
+/import.report

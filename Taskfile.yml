@@ -11,22 +11,89 @@ tasks:
     cmds:
       - python -m spacy download en_core_web_md
 
-  neo4j-console:
+  db-console:
     desc: Run Neo4j as a console application
     cmds:
       - $NEO4J_HOME/bin/neo4j console
 
-  neo4j-start:
+  db-start:
     desc: Run Neo4j as a background process
     cmds:
       - $NEO4J_HOME/bin/neo4j start
 
-  neo4j-stop:
+  db-stop:
     desc: Stop Neo4j as a background process
     cmds:
       - $NEO4J_HOME/bin/neo4j stop
+
+  prefect-up:
+    desc: Start Prefect server
+    cmds:
+      - prefect server start
+
+  embed:
+    desc: Preprocess text data into embedding matrix
+    cmds:
+      - python graphml/flows/make_embeds.py
+    sources:
+      - data/stat-abstracts.tsv
+      - graphml/flows/make_embeds.py
+    generates:
+      - data/embed_matrix.csv.gz
+
+  adjacency:
+    desc: Create adjacency matrix from embeddings
+    cmds:
+      - python graphml/flows/make_adjacency.py
+    sources:
+      - data/embed_matrix.csv.gz
+      - graphml/flows/make_adjacency.py
+    generates:
+      - data/adj_matrix.npz
+
+  nodes:
+    desc: Create graph nodes and edges
+    cmds:
+      - python graphml/flows/make_nodes.py
+    sources:
+      - data/stat-abstracts.tsv
+      - graphml/flows/make_nodes.py
+    generates:
+      - data/nodes.csv
+
+  edges:
+    desc: Create graph edges from adjacency matrix
+    cmds:
+      - python graphml/flows/make_edges.py
+    sources:
+      - data/adj_matrix.npz
+      - data/nodes.csv
+      - graphml/flows/make_edges.py
+    generates:
+      - data/edges.csv
+
+  preprocess:
+    desc: Preprocess data into graph nodes and edges
+    cmds:
+      - task: embed
+      - task: adjacency
+      - task: nodes
+      - task: edges
 
   load-graph:
     desc: Bulk load nodes and edges
     cmds:
       - $NEO4J_HOME/bin/neo4j-admin database import full graphml --nodes="data/nodes_header.csv,data/nodes.csv" --relationships="data/edges_header.csv,data/edges.csv" --overwrite-destination
+
+  db-prep:
+    desc: Preprocess data into nodes and edges, bulk load into DB
+    deps:
+      - db-stop
+    cmds:
+      - task: preprocess
+      - task: load-graph
+    sources:
+      - data/nodes.csv
+      - data/nodes_header.csv
+      - data/edges.csv
+      - data/edges_header.csv

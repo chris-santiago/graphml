@@ -42,6 +42,7 @@ dbms.memory.heap.max_size=8G
 !!! note
 
     Those configs look like they may be for an older version of Neo4j.
+    Py2Neo is EOL; use official Neo4j drivers!
 
 ## Data
 

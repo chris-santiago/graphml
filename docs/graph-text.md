@@ -61,6 +61,20 @@ Workflow
 
     Step (2) is outdated. APOC config should be in its own `$NEO4J_HOME/conf/apoc.conf` file.
     Step (5) is outdated. See [import docs](https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/)
+    `py2neo` is EOL; use the official Python driver: `neo4j` via pip or another package manager
 
 # Explore a Graph Using Neo4j
 
+1. **Connect to Neo4j**. We first connect to the Neo4j server through the bolt interface and then do a sanity check to verify that we are connected to the correct database.
+2. **Create a subgraph for GDS**. The algorithms of the GDS library need to run within a virtual subgraph, so we create one with our Article nodes and SIMILAR_TO relationships.
+3. **Find important nodes**. We can look at importance in different ways. Degree centrality is one such way. Since our graph is based on similarity—that is, documents that are very similar to each other have an edge between them—nodes with a high degree of centrality are those that are similar to most other nodes. We use GDS to retrieve the 10 documents in the graph with the highest degree of centrality.
+   - Another useful measure of centrality is PageRank. Like degree centrality, the number of edges incident upon a node matters, but in addition, the quality of the nodes on the far end also matters. The quality is determined by the in-links into those nodes, so it’s a recursive metric.
+   - Yet another useful measure of importance is betweenness centrality. Nodes with high betweenness centrality act as bridges between clusters of nodes. In the context of scientific articles, such nodes represent papers that deal with multiple subject areas, and often end up being influential.
+4. **Use community detection**. Community detection is similar to clustering for nongraph data. The important difference is that community detection works with edge information alone. In that sense, it serves as an interesting alternative for finding interesting clusters in graph-based data. We cluster our data using two community detection algorithms. 
+   - Louvain modularity – Louvain is a popular community detection algorithm. It works by maximizing the modularity of the created cluster, where the modularity quantifies the quality of assignment of nodes to communities compared to a random graph. You can read more about the Louvain algorithm on the GDS Documentation page for Louvain algorithm.
+   - Label propagation – Label propagation is another community detection algorithm that is path based. It starts by propagating labels from node to its neighbors and forming communities based on the labels. You can read about label propagation on its GDS Documentation Page.
+   - We then download the community labels predicted by Louvain and label propagation, as well as the categories we had originally, and use them to construct labels.
+   - The node vectors (of dimension 300) are then reduced to 2 dimensions using UMAP for visualization. The clusters produced are color-coded using category labels, and predictions from Louvain and label propagation respectively. Clusters produced from Louvain and label propagation have more definitions compared to the original clusters from category labels.
+5. **Recommend similar articles**. The recommendation task is achieved using the Personalized PageRank (PPR) algorithm. PPR is a variation of PageRank where the random surfer gives up and returns to the same neighborhood with a certain probability instead of jumping to a random location.
+   - Given a document, we use Cypher to compute a set of nodes in its immediate neighborhood.
+   - Using the nodes in the neighborhood, we call PageRank in personalized mode, by specifying the sourceNodes configuration parameter and get back articles that are similar to the source article.
