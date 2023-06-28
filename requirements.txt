@@ -12,6 +12,7 @@ asyncpg==0.27.0
 attrs==23.1.0
 backcall==0.2.0
 blis==0.7.9
+bokeh==3.2.0
 cachetools==5.3.1
 catalogue==2.0.8
 certifi==2023.5.7
@@ -54,7 +55,7 @@ importlib-resources==5.12.0
 ipykernel==6.23.2
 ipython==8.14.0
 jedi==0.18.2
-jinja2==3.1.2
+Jinja2==3.1.2
 joblib==1.2.0
 jsonpatch==1.33
 jsonpointer==2.4
@@ -111,7 +112,7 @@ python-dotenv==1.0.0
 python-slugify==8.0.1
 pytz==2023.3
 pytzdata==2020.1
-pyyaml==6.0
+PyYAML==6.0
 pyzmq==25.1.0
 readchar==4.0.5
 regex==2023.6.3
@@ -152,4 +153,5 @@ wasabi==1.1.2
 wcwidth==0.2.6
 websocket-client==1.6.0
 websockets==11.0.3
+xyzservices==2023.5.0
 zipp==3.15.0

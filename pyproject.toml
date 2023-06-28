@@ -52,6 +52,7 @@ dependencies = [
     "prefect>=2.10.15",
     "ipykernel>=6.23.2",
     "python-dotenv>=1.0.0",
+    "bokeh>=3.2.0",
 ]
 
 
