@@ -97,3 +97,19 @@ tasks:
       - data/nodes_header.csv
       - data/edges.csv
       - data/edges_header.csv
+
+  load-cites:
+    desc: Bulk load citations nodes and edges
+    cmds:
+      - $NEO4J_HOME/bin/neo4j-admin database import full graphml --nodes="data/stat-nodes.csv" --relationships="data/stat-edges.csv" --overwrite-destination
+
+  embed-cites:
+    desc: Embed citations graph via Node2Vec
+    cmds:
+      - python graphml/flows/embed_cites.py
+    sources:
+      - graphml/flows/embed_cites.py
+      - data/stat-nodes.csv
+      - data/stat-edges.csv
+    generates:
+      - data/embed_cites.csv
