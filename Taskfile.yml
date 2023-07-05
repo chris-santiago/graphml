@@ -112,4 +112,4 @@ tasks:
       - data/stat-nodes.csv
       - data/stat-edges.csv
     generates:
-      - data/embed_cites.csv
+      - data/embed_cites.csv.gz
