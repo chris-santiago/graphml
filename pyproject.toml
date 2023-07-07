@@ -55,6 +55,8 @@ dependencies = [
     "hvplot>=0.8.4",
     "holoviews>=1.16",
     "datashader>=0.15.0",
+    "torch>=2.0.1",
+    "torch-geometric>=2.3.1",
 ]
 
 

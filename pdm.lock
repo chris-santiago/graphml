@@ -951,6 +951,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "mpmath"
+version = "1.3.0"
+summary = "Python library for arbitrary-precision floating-point arithmetic"
+
+[[package]]
 name = "multipledispatch"
 version = "1.0.0"
 summary = "Multiple dispatch"
@@ -1675,6 +1680,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "sympy"
+version = "1.12"
+requires_python = ">=3.8"
+summary = "Computer algebra system (CAS) in Python"
+dependencies = [
+    "mpmath>=0.19",
+]
+
+[[package]]
 name = "tabulate"
 version = "0.9.0"
 requires_python = ">=3.7"
@@ -1728,6 +1742,35 @@ name = "toolz"
 version = "0.12.0"
 requires_python = ">=3.5"
 summary = "List processing tools and functional utilities"
+
+[[package]]
+name = "torch"
+version = "2.0.1"
+requires_python = ">=3.8.0"
+summary = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
+dependencies = [
+    "filelock",
+    "jinja2",
+    "networkx",
+    "sympy",
+    "typing-extensions",
+]
+
+[[package]]
+name = "torch-geometric"
+version = "2.3.1"
+requires_python = ">=3.7"
+summary = "Graph Neural Network Library for PyTorch"
+dependencies = [
+    "jinja2",
+    "numpy",
+    "psutil>=5.8.0",
+    "pyparsing",
+    "requests",
+    "scikit-learn",
+    "scipy",
+    "tqdm",
+]
 
 [[package]]
 name = "tornado"
@@ -1890,7 +1933,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 lock_version = "4.2"
 cross_platform = true
 groups = ["default", "docs", "qa", "test"]
-content_hash = "sha256:f46ac6b36c20329d754895e4a768420c7ba3d4a459b85849a5135d67815dc637"
+content_hash = "sha256:753431c976d31e2d890011cf8915a67dd13fd1a4fe3068984898456fa77a7b56"
 
 [metadata.files]
 "aiosqlite 0.19.0" = [
@@ -2972,6 +3015,10 @@ content_hash = "sha256:f46ac6b36c20329d754895e4a768420c7ba3d4a459b85849a5135d678
     {url = "https://files.pythonhosted.org/packages/4c/81/8c1de2573c4fa5fff7fc20eba1dad2892f43ed22ba145b595243e375c274/mkdocstrings_python-1.1.2-py3-none-any.whl", hash = "sha256:c2b652a850fec8e85034a9cdb3b45f8ad1a558686edc20ed1f40b4e17e62070f"},
     {url = "https://files.pythonhosted.org/packages/7b/22/eaa1ccd8aaeac72953a780f4b6c82650475d241dd953582706db547db004/mkdocstrings_python-1.1.2.tar.gz", hash = "sha256:f28bdcacb9bcdb44b6942a5642c1ea8b36870614d33e29e3c923e204a8d8ed61"},
 ]
+"mpmath 1.3.0" = [
+    {url = "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl", hash = "sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c"},
+    {url = "https://files.pythonhosted.org/packages/e0/47/dd32fa426cc72114383ac549964eecb20ecfd886d1e5ccf5340b55b02f57/mpmath-1.3.0.tar.gz", hash = "sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f"},
+]
 "multipledispatch 1.0.0" = [
     {url = "https://files.pythonhosted.org/packages/51/c0/00c9809d8b9346eb238a6bbd5f83e846a4ce4503da94a4c08cb7284c325b/multipledispatch-1.0.0-py3-none-any.whl", hash = "sha256:0c53cd8b077546da4e48869f49b13164bebafd0c2a5afceb6bb6a316e7fb46e4"},
     {url = "https://files.pythonhosted.org/packages/fe/3e/a62c3b824c7dec33c4a1578bcc842e6c30300051033a4e5975ed86cc2536/multipledispatch-1.0.0.tar.gz", hash = "sha256:5c839915465c68206c3e9c473357908216c28383b425361e5d144594bf85a7e0"},
@@ -4032,6 +4079,10 @@ content_hash = "sha256:f46ac6b36c20329d754895e4a768420c7ba3d4a459b85849a5135d678
     {url = "https://files.pythonhosted.org/packages/06/68/559bed5484e746f1ab2ebbe22312f2c25ec62e4b534916d41a8c21147bf8/starlette-0.27.0.tar.gz", hash = "sha256:6a6b0d042acb8d469a01eba54e9cda6cbd24ac602c4cd016723117d6a7e73b75"},
     {url = "https://files.pythonhosted.org/packages/58/f8/e2cca22387965584a409795913b774235752be4176d276714e15e1a58884/starlette-0.27.0-py3-none-any.whl", hash = "sha256:918416370e846586541235ccd38a474c08b80443ed31c578a418e2209b3eef91"},
 ]
+"sympy 1.12" = [
+    {url = "https://files.pythonhosted.org/packages/d2/05/e6600db80270777c4a64238a98d442f0fd07cc8915be2a1c16da7f2b9e74/sympy-1.12-py3-none-any.whl", hash = "sha256:c3588cd4295d0c0f603d0f2ae780587e64e2efeedb3521e46b9bb1d08d184fa5"},
+    {url = "https://files.pythonhosted.org/packages/e5/57/3485a1a3dff51bfd691962768b14310dae452431754bfc091250be50dd29/sympy-1.12.tar.gz", hash = "sha256:ebf595c8dac3e0fdc4152c51878b498396ec7f30e7a914d6071e674d49420fb8"},
+]
 "tabulate 0.9.0" = [
     {url = "https://files.pythonhosted.org/packages/40/44/4a5f08c96eb108af5cb50b41f76142f0afa346dfa99d5296fe7202a11854/tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"},
     {url = "https://files.pythonhosted.org/packages/ec/fe/802052aecb21e3797b8f7902564ab6ea0d60ff8ca23952079064155d1ae1/tabulate-0.9.0.tar.gz", hash = "sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c"},
@@ -4085,6 +4136,31 @@ content_hash = "sha256:f46ac6b36c20329d754895e4a768420c7ba3d4a459b85849a5135d678
 "toolz 0.12.0" = [
     {url = "https://files.pythonhosted.org/packages/7f/5c/922a3508f5bda2892be3df86c74f9cf1e01217c2b1f8a0ac4841d903e3e9/toolz-0.12.0-py3-none-any.whl", hash = "sha256:2059bd4148deb1884bb0eb770a3cde70e7f954cfbbdc2285f1f2de01fd21eb6f"},
     {url = "https://files.pythonhosted.org/packages/cf/05/2008534bbaa716b46a2d795d7b54b999d0f7638fbb9ed0b6e87bfa934f84/toolz-0.12.0.tar.gz", hash = "sha256:88c570861c440ee3f2f6037c4654613228ff40c93a6c25e0eba70d17282c6194"},
+]
+"torch 2.0.1" = [
+    {url = "https://files.pythonhosted.org/packages/1a/32/222e49ed160fa7d0690a938c42428fecb60b4595101d8e88ea523f70e406/torch-2.0.1-cp39-none-macosx_10_9_x86_64.whl", hash = "sha256:c62df99352bd6ee5a5a8d1832452110435d178b5164de450831a3a8cc14dc680"},
+    {url = "https://files.pythonhosted.org/packages/21/33/4925decd863ce88ed9190a4bd872b01c146243ee68db08c72923984fe335/torch-2.0.1-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:359bfaad94d1cda02ab775dc1cc386d585712329bb47b8741607ef6ef4950747"},
+    {url = "https://files.pythonhosted.org/packages/22/15/b2e3b53bf569579900175626998a927596c59f6a4a9e4f773f1d303efb81/torch-2.0.1-cp38-cp38-win_amd64.whl", hash = "sha256:f66aa6b9580a22b04d0af54fcd042f52406a8479e2b6a550e3d9f95963e168c8"},
+    {url = "https://files.pythonhosted.org/packages/2e/27/5c912ccc490ec78585cd463198e80be27b53db77f02e7398b41305606399/torch-2.0.1-cp310-none-macosx_10_9_x86_64.whl", hash = "sha256:567f84d657edc5582d716900543e6e62353dbe275e61cdc36eda4929e46df9e7"},
+    {url = "https://files.pythonhosted.org/packages/3c/44/d0d3e07e03a17dfafaa3affbc07430d13b60b774e6fa495ab43828ef894e/torch-2.0.1-cp38-none-macosx_11_0_arm64.whl", hash = "sha256:1bcffc16b89e296826b33b98db5166f990e3b72654a2b90673e817b16c50e32b"},
+    {url = "https://files.pythonhosted.org/packages/3c/67/7e19ebc15430f7385baee359383744c03d3600b51def9b399d0b8686e892/torch-2.0.1-cp39-none-macosx_11_0_arm64.whl", hash = "sha256:671a2565e3f63b8fe8e42ae3e36ad249fe5e567435ea27b94edaa672a7d0c416"},
+    {url = "https://files.pythonhosted.org/packages/48/f4/d0b61525a3d3db78636f1937d1bc24cbb39abc57484a545b72b6ab35c114/torch-2.0.1-cp39-cp39-win_amd64.whl", hash = "sha256:8742bdc62946c93f75ff92da00e3803216c6cce9b132fbca69664ca38cfb3e18"},
+    {url = "https://files.pythonhosted.org/packages/5a/77/778954c0aad4f7901a1ba02a129bca7467c64a19079108e6b1d6ce8ae575/torch-2.0.1-cp310-none-macosx_11_0_arm64.whl", hash = "sha256:787b5a78aa7917465e9b96399b883920c88a08f4eb63b5a5d2d1a16e27d2f89b"},
+    {url = "https://files.pythonhosted.org/packages/5d/61/7273dea60a17c63d9eaef04ae8fee02351e0cb477e76df4ea211896ae124/torch-2.0.1-cp311-cp311-manylinux2014_aarch64.whl", hash = "sha256:b6019b1de4978e96daa21d6a3ebb41e88a0b474898fe251fd96189587408873e"},
+    {url = "https://files.pythonhosted.org/packages/79/bb/0e1239b542d12b82cfb4c7d74359c68f0d23b536d1a4ac941a10b848488f/torch-2.0.1-cp39-cp39-manylinux2014_aarch64.whl", hash = "sha256:423e0ae257b756bb45a4b49072046772d1ad0c592265c5080070e0767da4e490"},
+    {url = "https://files.pythonhosted.org/packages/85/68/f901437d3e3ef6fe97adb1f372479626d994185b8fa06803f5bdf3bb90fd/torch-2.0.1-cp311-none-macosx_11_0_arm64.whl", hash = "sha256:25aa43ca80dcdf32f13da04c503ec7afdf8e77e3a0183dd85cd3e53b2842e527"},
+    {url = "https://files.pythonhosted.org/packages/88/6b/98ae5f6094b8ab12e00304f8474635b6f75a357764b9a2a4126252bc3ac4/torch-2.0.1-cp38-none-macosx_10_9_x86_64.whl", hash = "sha256:1adb60d369f2650cac8e9a95b1d5758e25d526a34808f7448d0bd599e4ae9072"},
+    {url = "https://files.pythonhosted.org/packages/8a/e7/c216fe520b877cf4fe03858c825cd2031ca3e81e455b89639c9b5ec91981/torch-2.0.1-cp310-cp310-win_amd64.whl", hash = "sha256:7c84e44d9002182edd859f3400deaa7410f5ec948a519cc7ef512c2f9b34d2c4"},
+    {url = "https://files.pythonhosted.org/packages/8c/4d/17e07377c9c3d1a0c4eb3fde1c7c16b5a0ce6133ddbabc08ceef6b7f2645/torch-2.0.1-cp310-cp310-manylinux1_x86_64.whl", hash = "sha256:8ced00b3ba471856b993822508f77c98f48a458623596a4c43136158781e306a"},
+    {url = "https://files.pythonhosted.org/packages/8d/9b/f20686a5ebd09c6feacced771cf4041a521c411c5bb10359580e9e491797/torch-2.0.1-cp311-none-macosx_10_9_x86_64.whl", hash = "sha256:ef654427d91600129864644e35deea761fb1fe131710180b952a6f2e2207075e"},
+    {url = "https://files.pythonhosted.org/packages/90/f6/b0358e90e10306f80c474379ae1c637760848903033401d3e662563f83a3/torch-2.0.1-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:0882243755ff28895e8e6dc6bc26ebcf5aa0911ed81b2a12f241fc4b09075b13"},
+    {url = "https://files.pythonhosted.org/packages/96/28/026dc037f177d53558477931677b120f649dd5a0dcdc4b44dc38b3d75711/torch-2.0.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:5ef3ea3d25441d3957348f7e99c7824d33798258a2bf5f0f0277cbcadad2e20d"},
+    {url = "https://files.pythonhosted.org/packages/c8/21/25020cfdd9f564a72f400ee491610e50cb212e8add8031abaa959af6451e/torch-2.0.1-cp311-cp311-manylinux1_x86_64.whl", hash = "sha256:e617b1d0abaf6ced02dbb9486803abfef0d581609b09641b34fa315c9c40766d"},
+    {url = "https://files.pythonhosted.org/packages/d0/c8/f0dc8642e3ce0a3ae5f05e5149ab9df5375d569294f7be9a1ab1d95a1d76/torch-2.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:dbd68cbd1cd9da32fe5d294dd3411509b3d841baecb780b38b3b7b06c7754434"},
+    {url = "https://files.pythonhosted.org/packages/e5/9a/ce0fe125f226ffce8deba6a18bd8d0b9f589aa236780a83a6d70b5525f56/torch-2.0.1-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:e10e1597f2175365285db1b24019eb6f04d53dcd626c735fc502f1e8b6be9875"},
+]
+"torch-geometric 2.3.1" = [
+    {url = "https://files.pythonhosted.org/packages/06/a5/9f5af849c4185da5ea55f70ef17e23f93355cd4e989d82cfc8ba2d8747af/torch_geometric-2.3.1.tar.gz", hash = "sha256:454fd0bbc128a17a4b9d15010ba9f66d48ec8cd7277991b888a7770263fa125d"},
 ]
 "tornado 6.3.2" = [
     {url = "https://files.pythonhosted.org/packages/30/3c/68e9896ce47dd4acdb7e27945046f139db2862d3b990c655a5c0627c9a05/tornado-6.3.2-cp38-abi3-macosx_10_9_universal2.whl", hash = "sha256:c367ab6c0393d71171123ca5515c61ff62fe09024fa6bf299cd1339dc9456829"},
