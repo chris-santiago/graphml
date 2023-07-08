@@ -11,7 +11,6 @@ def main():
     dataset = data.to_torch()
     train_dl = DataLoader([dataset], batch_size=64)
     valid_dl = DataLoader([dataset], batch_size=64)
-    DataLoader([dataset], batch_size=64)
 
     model = graphml.GNNModel(
         hidden_channels=128,
