@@ -1,0 +1,400 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Graph Embeddings for Document Similarity - graphml</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#graph-embeddings-for-document-similarity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="graphml" class="md-header__button md-logo" aria-label="graphml" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            graphml
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Graph Embeddings for Document Similarity
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/chris-santiago/graphml" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="graphml" class="md-nav__button md-logo" aria-label="graphml" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    graphml
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/chris-santiago/graphml" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#construct-node2vec-embeddings" class="md-nav__link">
+    Construct Node2Vec Embeddings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-citation-embeddings" class="md-nav__link">
+    Visualize Citation Embeddings
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="graph-embeddings-for-document-similarity">Graph Embeddings for Document Similarity</h1>
+<h2 id="construct-node2vec-embeddings">Construct Node2Vec Embeddings</h2>
+<p>In our first milestone of the project, we will load the graph into Neo4j and generate node2vec node embeddings using the Graph Data Science (GDS) library. These embeddings are dense feature vectors that represent the structure around each node. In this high-dimensional space, nodes that have similar neighborhood structures are closer together than nodes with different neighborhood structures.</p>
+<p>Node2vec is one of a family of embeddings that are based on making random walks on graphs. As an NLP practitioner, you are undoubtedly familiar with word2vec. The intuition behind node2vec is similar to word2vec. With word2vec, the idea is to train a network to predict whether a pair of words “belong” together. The belongingness is learned using training data from naturally occurring sentences in text, by finding pairs of words that co-occur within a fixed-size window. With node2vec and its predecessors, random walk-based embedding strategies such as DeepWalk, one constructs sequences of nodes by executing random walks from each node. These sequences are used to find nodes that co-occur within a fixed window size, and a network is trained to predict that these nodes are similar.</p>
+<p>Early random walk embedding schemes such as DeepWalk treated each relationship as identical, and the random walks generated were truly random. Node2vec, on the other hand, requires two additional constraints that influence the randomness of the walk. These two parameters are the return factor and the in-out parameter. The return factor determines how often a walk returns to its previously visited node, and the in-out parameter determines whether the walk moves away from the source node or gets closer.</p>
+<ol>
+<li><strong>Load a graph into Neo4j</strong>. Stop the Neo4j server if it is running. Use the neo4j-admin import command to load the provided data files into Neo4j:</li>
+<li><code>$NEO4J_HOME/bin/neo4j-admin import --database=av2-graph --nodes=/path/to/stat_nodes.csv --relationships=/path/to/stat_edges.csv</code></li>
+<li>Restart the server. </li>
+<li><strong>Connect to Neo4j from Python</strong>. We use py2neo as our Python interface and interact with Neo4j from Python over the Jupyter notebook using it. py2neo is a lightweight wrapper which does not require any change in the Cypher query being sent, and thus the queries can be used without change directly on the Neo4j web interface as well. </li>
+<li><strong>Create a virtual graph for GDS</strong>. GDS requires all its algorithms to run within a virtual subgraph. The origin of the requirement seems to have been the assumption that algorithms would need to run on a subset of the data. Hence running algorithms within a subgraph makes sense for performance reasons. In our case, we will run the GDS algorithms against our entire graph. But because of the GDS requirement, we will need to create a virtual subgraph that contains the entire graph. For more on virtual graphs, read the neo4j documentation on creating graphs. </li>
+<li><strong>Generate node2vec vectors</strong>. In node2vec you execute fixed-length random walks from each node in the graph. The intuition is that nodes in each walk will depend on the connectivity between them, hence the walks will incorporate the connectivity information.</li>
+<li>The node2vec family of random walk-based algorithms is influenced to some extent by the word2vec algorithm. You can imagine words in your vocabulary as being a graph, where the edge weight between words w1 and w2 would be determined by the probability that w2 follows w1. These probabilities can be derived by analyzing a large enough corpus of text. With node2vec, we start with a graph and synthesize “sentences” by executing the random walks.</li>
+<li>The analogy described above is almost 100% applicable to a predecessor algorithm to node2vec called DeepWalk. DeepWalk is an example of a first order biased random walk algorithm, meaning that the probability of a node being in a random walk is dependent only on its current state. The node2vec algorithm improves upon DeepWalk by being a second order biased random walk algorithm, meaning that the probability of a node being in a walk is dependent not only on its current state but also on its previous state.</li>
+<li>The second order bias is controlled by two parameters—the returnFactor (p) and inOutFactor (q).</li>
+<li>The returnFactor governs the probability of backtracking and revisiting a previously visited node in the walk. Values lower than 1 encourage backtracking and values higher than 1 discourage it.</li>
+<li>The inOutFactor determines whether the walk will move “outward” or “inward.” Setting inOutFactor to values greater than 1 encourages it to choose nodes closer to the previous node, that is, it encourages breadth-first search (BFS). On the other hand, setting it to values higher than 1 encourages the walk to choose nodes further away from the previous node, that is, it encourages depth-first search (DFS).</li>
+<li>The inOutFactor can be used to tune the behavior of node2vec embeddings to either prefer “homophily” or community-based similarity (for values &lt; 1) or “structural” or connection-based similarity (for values &gt; 1). This is somewhat analogous to syntactic and semantic similarity in NLP.</li>
+<li>Read the node2vec documentation to learn how to call the GDS library. We want to invoke the GDS algorithm to compute the node2vec embeddings and write them back into the database under the node property node2vec_vec key.</li>
+<li>
+<p>We want to focus on community-based similarity as far as possible, so we use the following parameters for node2vec. You should also experiment with other parameters and observe their effects on the visualizations to get an intuition for how node2vec works.
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>embeddingDimension: 128
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>walksPerNode: 10
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>walkLength: 80
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>windowSize: 3
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>inOutFactor: 0.5
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>returnFactor: 0.5
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>concurrency: 1
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>iterations: 25
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>writeProperty: ‘node2vec_vec’
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Verify embeddings have been written out</strong>. Verify that the node property node2vec_vec exists and is populated for a random document (say doc_id == "math/0504058"). </p>
+</li>
+<li><strong>Dump out the content of the database</strong>. Call poc.export.json.all to dump the database to disk in JSON format.</li>
+</ol>
+<p>In this liveProject, we start with a new data source, the citation network. This is a set of document nodes and edges, and can therefore be modeled as a graph in Neo4j. In this milestone, we use the node2vec algorithm from the Neo4j Graph Data Science (GDS) to generate node2vec embeddings for each document. These embeddings are based only on the citation connections and thus represent a different approach to the document corpus than our previous embeddings. In addition, while the previous liveProject started from document embeddings and resulted in a graph, this liveProject starts with a graph and results in embeddings.</p>
+<h2 id="visualize-citation-embeddings">Visualize Citation Embeddings</h2>
+<ol>
+<li><strong>Extract document IDs, vectors, and labels.</strong>  The neo4j-dump.json file that we extracted in the previous milestone of this liveProject contains all the information about the Neo4j database. The file is in JSON-L format, which means that each node and relationship record is on its own line as a well-formed JSON structure. The data we need for our current milestone is the document ID, the document vector generated by node2vec, and the category label. They can be found in the JSON at the following locations.</li>
+<li>doc_id: data['properties']['doc_id']</li>
+<li>vector: data['properties']['node2vec_vec']</li>
+<li>label: data['properties']['category']</li>
+<li>Extract these variables for each node into rhw Python list variables docids, vectors, and labels.</li>
+<li>At the end of this step each list should have 50426 elements in it.</li>
+<li>When adding the vector to the list vectors, convert it to a NumPy array first by wrapping the list vector in a np.array(vector). That way the vectors list is a list of numpy.array objects.</li>
+<li><strong>Use UMAP for dimensionality reduction</strong>.  Convert the list vectors of numpy.array objects to a matrix. This is done by wrapping the list in another np.array(vectors).</li>
+<li>Check that you now have a matrix of size (50426, 128), since each vector has 128 elements.
+   N- ext convert the labels to a set of numeric IDs. This can be done by creating a dictionary of category strings to label id and then looking up the ID from the label to create a new variable label_ids.</li>
+<li>Create a UMAP mapper. It is worth experimenting with a few hyperparameters for mapper construction based on information in the UMAP parameters page and seeing what the resulting visualization is like and whether it aligns with what we believe the data should look like.</li>
+<li>In our case, we will create the UMAP mapper with the following parameters:<ul>
+<li>n_neighbors 10</li>
+<li>min_dist 0.1</li>
+<li>metric “cosine”</li>
+</ul>
+</li>
+<li>Although we are using UMAP here to reduce the dimension of X to 2D, UMAP allows reducing to other dimensions as well.</li>
+<li>We then plot the points in 2D using umap.plot.points. The plot indicates two major clusters. Each point represents the node2vec embedding for a document projected by UMAP onto 2D space. Each point has an associated color that indicates its category. Documents of all categories seem to be evenly distributed in both clusters.</li>
+<li>So it looks like node2vec has discovered a coarser structure in the graph that was not implied by the category labels. This makes intuitive sense since citations reflect acknowledgments of past work, and papers in one area of study are very likely to be dependent on papers in other areas of study.</li>
+<li><strong>Use clustering for HDBSCAN</strong>.  Rather than depend only on visual identification of clusters, we can use a clustering algorithm such as HDBSCAN to discover clusters for us. We will cluster on reduced 2D space generated by UMAP rather than the full 128-dimensional node2vec vector space. This is because it is generally very difficult to find clusters in high dimensions because high dimensional data is sparse. As with UMAP, it is worth trying out different hyperparameter values for HDBSCAN as well. This page describes the various available HDBSCAN hyperparameters. We will use the following HDBSCAN parameters to train the clusterer.</li>
+<li>min_cluster_size 40</li>
+<li>To keep the output to not be too dense, we sample 5000 points from our input and plot those as a 2D scatterplot. As with UMAP, HDBSCAN also predicts two major clusters. </li>
+<li><strong>Examine the composition of the largest clusters</strong>.  We have seen that UMAP dimensionality reduction and HDBSCAN clustering both show two major clusters in the data. We also notice that the categories seem to be distributed uniformly across both clusters and that the node2vec embedding does not seem to capture this information.</li>
+<li>We next examine the composition (in terms of document categories) of documents in each of the two largest clusters. First, we find the two largest clusters by counting the labels returned by clusterer.labels_.</li>
+<li>Remember that HDBSCAN, like other density-based clusterers, will assign an “unknown” or “other” label to documents it is unable to cluster. The "-1" cluster can be quite large and have no discernible structure, so we want to ignore it when we find the two largest clusters.</li>
+<li>For each of the two clusters, we count the different number of labels and plot a bar chart of label counts (y-axis) versus labels (x-axis).</li>
+<li>We observe that stat.ML (machine learning) is dominant in both clusters. However, in one cluster other subject areas are more common compared to stat.ML, implying that this cluster may have a more “rounded” set of articles than the other. In both cases, machine learning papers seem to be very popular in the field of statistics.</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>
