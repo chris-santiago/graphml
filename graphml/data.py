@@ -4,7 +4,6 @@ import typing as T
 import polars as pl
 import torch
 from torch_geometric.data import Data
-from torch_geometric.data.lightning import LightningNodeData
 from torch_geometric.transforms import RandomNodeSplit
 
 import graphml
@@ -13,12 +12,16 @@ constants = graphml.Constants()
 
 
 class DocIdEncoder:
+    """Class to encode/decode document IDs."""
+
     def __init__(self, ids: T.Iterable[str]):
         self.idx2doc = dict(enumerate(ids))
         self.doc2idx = {v: k for k, v in self.idx2doc.items()}
 
 
 class CategoryEncoder:
+    """Class to encode/decode categories."""
+
     def __init__(self, categories: T.Iterable[str]):
         self.id2cat = dict(enumerate(categories))
         self.cat2id = {v: k for k, v in self.id2cat.items()}
@@ -35,6 +38,7 @@ class GraphData:
         self.cat_enc = CategoryEncoder(self.nodes.get_column("category").unique())
 
     def to_torch(self):
+        """Convert graph data to PyTorch Lightning Node Dataset."""
         mapped_edges = self.edges.with_columns(
             pl.col("source").map_dict(self.doc_enc.doc2idx),
             pl.col("target").map_dict(self.doc_enc.doc2idx),
@@ -50,11 +54,12 @@ class GraphData:
         )
         data.validate()
 
-        splitter = RandomNodeSplit()
-        return LightningNodeData(splitter(data), loader="full")
+        splitter = RandomNodeSplit(num_val=0.1, num_test=0.2)
+        return splitter(data)
 
 
 def get_graph_data():
+    """Get graph nodes, edges and vectors."""
     vectors = pl.read_csv(
         constants.DATA.joinpath("stat-abstract-vectors.csv"),
         has_header=False,

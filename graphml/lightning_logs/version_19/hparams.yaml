@@ -1,0 +1,7 @@
+conv_layers: 5
+hidden_channels: 128
+hidden_size: 128
+n_classes: 6
+optim: null
+p_drop: 0.2
+score_func: null
