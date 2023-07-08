@@ -113,3 +113,14 @@ tasks:
       - data/stat-edges.csv
     generates:
       - data/embed_cites.csv.gz
+
+  train-gnn:
+    desc: Train a GNN model
+    cmds:
+      - python graphml/train.py
+    sources:
+      - data/stat-nodes.csv
+      - data/stat-edges.csv
+      - data/stat-abstract-vectors.csv
+      - graphml/data.py
+      - graphml/model.py
