@@ -63,29 +63,29 @@ class GNNModel(lit.LightningModule):
             embeds = layer(x, edge_idx)
         return self.head(embeds)
 
-    def training_step(self, batch, idx):
-        x, edge_idx, y = batch.x, batch.edge_index, batch.y
-        labels = self(x, edge_idx)
-        loss = self.loss_func(labels, y)
-        self.log("train-loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
-        return loss
-
-    def validation_step(self, batch, idx):
+    def get_results(self, batch):
         x, edge_idx, y = batch.x, batch.edge_index, batch.y
         labels = self(x, edge_idx)
         loss = self.loss_func(labels, y)
         preds = torch.argmax(labels, dim=1)
-        self.score_func.update(preds, y)
+        return loss, preds
+
+    def training_step(self, batch, idx):
+        loss, _ = self.get_results(batch)
+        self.log("train-loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        return loss
+
+    def validation_step(self, batch, idx):
+        loss, preds = self.get_results(batch)
+        self.score_func.update(preds, batch.y)
         self.log("valid-loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
         self.log(
             "valid-acc", self.score_func, on_step=True, on_epoch=True, prog_bar=True, logger=True
         )
 
     def test_step(self, batch, idx):
-        x, edge_idx, y = batch.x, batch.edge_index, batch.y
-        labels = self(x, edge_idx)
-        loss = self.loss_func(labels, y)
-        torch.argmax(labels, dim=1)
+        loss, preds = self.get_results(batch)
+        self.score_func.update(preds, batch.y)
         self.log("test-loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
         self.log(
             "test-acc", self.score_func, on_step=True, on_epoch=True, prog_bar=True, logger=True
